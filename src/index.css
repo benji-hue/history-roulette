@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #12100e;
+  --color-panel: #1e1b17;
+  --color-panel-2: #272320;
+  --color-edge: #3a332c;
+  --color-parchment: #f3ece0;
+  --color-muted: #9a8f80;
+  --color-gold: #d9a441;
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(900px 500px at 50% -10%, #3a2a16 0%, transparent 60%),
+    radial-gradient(700px 450px at 10% 100%, #2a1d2e 0%, transparent 55%),
+    var(--color-ink);
+  background-attachment: fixed;
+  color: var(--color-parchment);
+  overscroll-behavior: none;
+}
+
+#root {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+/* Свайп не должен выделять текст на полпути. */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.safe-bottom {
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+}
+
+.screen-min-h {
+  min-height: calc(100dvh - env(safe-area-inset-top, 0px));
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes land {
+  0% {
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+  }
+  60% {
+    transform: scale(1.015) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hint-swipe {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(-9px);
+    opacity: 0.95;
+  }
+}
+
+.anim-land {
+  animation: land 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-fade {
+  animation: fade-in 0.22s ease-out both;
+}
+
+.anim-rise {
+  animation: rise 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-hint {
+  animation: hint-swipe 1.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-land,
+  .anim-fade,
+  .anim-rise,
+  .anim-hint {
+    animation: none;
+  }
+}
