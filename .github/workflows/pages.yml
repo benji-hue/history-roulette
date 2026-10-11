@@ -51,7 +51,11 @@ jobs:
 
       - uses: actions/configure-pages@v5
         with:
-          # Включает Pages сам, если он ещё не включён в настройках репозитория.
+          # Токен Actions не может СОЗДАТЬ сайт Pages — на это нужны права
+          # администратора. Поэтому на новом репозитории Pages включается один
+          # раз руками или через API:
+          #   gh api -X POST repos/OWNER/REPO/pages -f build_type=workflow
+          # Флаг оставлен на случай, если права выданы: тогда он сработает сам.
           enablement: true
 
       - uses: actions/upload-pages-artifact@v3
